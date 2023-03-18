@@ -5,9 +5,13 @@
 // https://github.com/moe-moe-pupil/RDKitTools/blob/main/LICENSE
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------
+
 namespace RDKitTools.Skill
 {
     using RDKitTools.Utils;
+    using RDKitTools.Unit;
+    using RDKitTools.Enum;
+    using RDKitTools.Struct;
 
     /// <summary lang='Zh-CN'>
     /// 基础Effect类，技能效果的最小单元.
@@ -27,13 +31,12 @@ namespace RDKitTools.Skill
         private Effect(int value, string name)
             : base(value, name)
         {
-            // todo
         }
 
-        /// <summary lang='Zh-CN'>
-        /// 效果触发.
+        /// <summary lang>
+        /// trigger effect.
         /// </summary>
-        public abstract void Trigger();
+        public abstract void Trigger(SEffect effectData);
 
         private sealed class DamageEffect : Effect
         {
@@ -42,9 +45,9 @@ namespace RDKitTools.Skill
             {
             }
 
-            public override void Trigger()
+            public override void Trigger(SEffect effectData)
             {
-                throw new NotImplementedException();
+                (Unit from, EBuffType type, double value) = effectData;
             }
         }
 

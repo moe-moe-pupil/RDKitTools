@@ -59,6 +59,9 @@ dotnet_diagnostic.SA1623.severity = suggestion
 # SA1649: File name should match first type name
 dotnet_diagnostic.SA1649.severity = suggestion
 
+# SA1101: Prefix local calls with this
+dotnet_diagnostic.SA1101.severity = none
+
 [*.{cs,vb}]
 #### Naming styles ####
 

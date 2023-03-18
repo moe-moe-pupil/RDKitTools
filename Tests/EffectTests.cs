@@ -10,7 +10,7 @@ namespace Tests
     using RDKitTools.Skill;
 
     [TestFixture]
-    public class ModifyTests
+    public class EffectTests
     {
         [SetUp]
         public void Setup()
@@ -18,7 +18,7 @@ namespace Tests
         }
 
         [Test]
-        public void BasicModifyCalc()
+        public void BasicEffect()
         {
             string[] rawString = { "2", "3", "=999", "1.1" };
             Assert.That(Calculator.Calc(rawString), Is.EqualTo(1000.1));

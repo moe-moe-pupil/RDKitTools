@@ -17,7 +17,7 @@ namespace RDKitTools.Skill
         /// <summary lang='Zh-CN'>
         /// 效果类聚合.
         /// </summary>
-        private List<Effect> _effects = new List<Effect>();
+        private readonly List<Effect> _effects = new ();
 
         /// <summary lang='Zh-CN'>
         /// 效果类聚合.
