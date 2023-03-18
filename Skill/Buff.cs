@@ -8,8 +8,6 @@
 
 namespace RDKitTools.Skill
 {
-    using RDKitTools.Skill;
-
     /// <summary lang='Zh-CN'>
     /// Buff类，Effect类的聚合，负责分类和触发Effect.
     /// 规则1：_active、_passive分别为技能释放，被动的List<Effect>数组.

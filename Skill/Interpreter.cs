@@ -57,7 +57,7 @@ namespace RDKitTools.Skill
             List<InterpreterResult> results = new List<InterpreterResult>();
             foreach (string str in rawParams)
             {
-                InterpreterResult result = new () { Sign = InterpreterSign.Add, Mulitiply = false, Value = 1 };
+                InterpreterResult result = new() { Sign = InterpreterSign.Add, Mulitiply = false, Value = 1 };
                 switch (str[0])
                 {
                     case '+':

@@ -18,7 +18,7 @@ namespace RDKitTools.Utils
     public class SmartTimer<T>
         where T : TimerAction, ITimerAction, new()
     {
-        private static readonly List<T> s_actions = new ();
+        private static readonly List<T> s_actions = new();
         private bool _hasReset = true;
 
         public void AddAction(double startTime, string name, bool active = false)

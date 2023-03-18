@@ -115,7 +115,7 @@ namespace RDKitTools.Utils
                 System.Reflection.BindingFlags.FlattenHierarchy)
                 .Where(fieldInfo => enumerationType.IsAssignableFrom(fieldInfo.FieldType))
                 .Select(fieldInfo =>
-                (TEnum)fieldInfo.GetValue(default) !);
+                (TEnum)fieldInfo.GetValue(default)!);
             return fieldsForType.ToDictionary(x => x.Value);
         }
     }
