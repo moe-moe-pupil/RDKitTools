@@ -4,11 +4,25 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>RDKitTools</AssemblyName>
+    <Authors>MoeThun</Authors>
+    <Company>MoeThun</Company>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <PackageId>$(AssemblyName)</PackageId>
+    <Description>just some toolkits for game dev's mod support.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/moe-moe-pupil/RDKitTools</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Game, ModSupport</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="stylecop.json" />
     <Compile Remove="Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="stylecop.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="30.0.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
