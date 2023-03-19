@@ -7,7 +7,10 @@
 // --------------------------------------------------------------------------------------------------------------
 namespace Tests
 {
+    using RDKitTools.Enum;
     using RDKitTools.Skill;
+    using RDKitTools.Struct;
+    using RDKitTools.Unit;
 
     [TestFixture]
     public class EffectTests
@@ -20,14 +23,13 @@ namespace Tests
         [Test]
         public void BasicEffect()
         {
-            string[] rawString = { "2", "3", "=999", "1.1" };
-            Assert.That(Calculator.Calc(rawString), Is.EqualTo(1000.1));
-            string[] rawString2 = { "2", "3", "-3", "1" };
-            Assert.That(Calculator.Calc(rawString2), Is.EqualTo(3.0));
-            string[] rawString3 = { "2", "3", "100%", "1" };
-            Assert.That(Calculator.Calc(rawString3), Is.EqualTo(12.0));
-            string[] rawString4 = { "2", "-3", "100%", "=1" };
-            Assert.That(Calculator.Calc(rawString4), Is.EqualTo(2.0));
+            Unit attacker = new Unit(100);
+            Unit defender = new Unit(100);
+            List<Effect> effects = new ();
+            effects.Add(Effect.Damage);
+            attacker.GiveBuff(new Buff(new SEffect() { From = attacker, Target = defender, Type = EBuffType.Magic, Value = 1 }, effects));
+            attacker.Update();
+            Assert.That(defender.GetHP(), Is.EqualTo(99));
         }
     }
 }

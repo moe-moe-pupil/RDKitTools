@@ -8,7 +8,10 @@
 
 namespace RDKitTools.Unit
 {
+    using System;
+    using RDKitTools.Enum;
     using RDKitTools.Skill;
+    using RDKitTools.Struct;
 
     /// <summary lang='Zh-CN'>
     /// 基础单位类，具有基本的生命、魔法等属性.
@@ -28,12 +31,12 @@ namespace RDKitTools.Unit
         /// <summary lang='zh-CN'>
         ///     造成伤害调整.
         /// </summary>
-        private double _damageModify = 1;
+        private List<double> _damageModify = new (Enumerable.Repeat<double>(1, Enum.GetNames(typeof(EBuffType)).Length));
 
         /// <summary lang='zh-CN'>
         ///     遭受伤害调整.
         /// </summary>
-        private double _defenseModify = 1;
+        private List<double> _defenseModify = new (Enumerable.Repeat<double>(1, Enum.GetNames(typeof(EBuffType)).Length));
 
         /// <summary lang='zh-CN'>
         ///     移动速度.
@@ -55,9 +58,41 @@ namespace RDKitTools.Unit
         /// </summary>
         private List<Buff> _buff = new ();
 
-        public void TakeDamage(ref Unit attacker, double value)
+        public Unit(double hp)
         {
-            this._hp -= value;
+            this._hp = hp;
+        }
+
+        public double GetDamageModify(EBuffType type)
+        {
+            return _damageModify[(int)type];
+        }
+
+        public void TakeDamage(ref Unit attacker, EBuffType type, double value)
+        {
+            this._hp -= value * _defenseModify[(int)type];
+        }
+
+        public void Update()
+        {
+            this._buff.ForEach(buff =>
+            {
+                (Unit from, Unit target, EBuffType type, double value) = buff.GetMetaData();
+                buff.Effects.ForEach(effect =>
+                {
+                    effect.Trigger(new SEffect() { From = from, Target = target, Type = type, Value = value });
+                });
+            });
+        }
+
+        public void GiveBuff(Buff buff)
+        {
+            this._buff.Add(buff);
+        }
+
+        public double GetHP()
+        {
+            return _hp;
         }
     }
 }

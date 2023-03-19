@@ -8,6 +8,9 @@
 
 namespace RDKitTools.Skill
 {
+    using RDKitTools.Enum;
+    using RDKitTools.Struct;
+
     /// <summary lang='Zh-CN'>
     /// Buff类，Effect类的聚合，负责分类和触发Effect.
     /// 规则1：_active、_passive分别为技能释放，被动的List<Effect>数组.
@@ -17,11 +20,28 @@ namespace RDKitTools.Skill
         /// <summary lang='Zh-CN'>
         /// 效果类聚合.
         /// </summary>
-        private readonly List<Effect> _effects = new ();
+        private List<Effect> _effects = new ();
 
-        /// <summary lang='Zh-CN'>
-        /// 效果类聚合.
-        /// </summary>
+        private SEffect _buffMetaData = new ()
+        {
+            From = null,
+            Target = null,
+            Type = EBuffType.Magic,
+            Value = 0,
+        };
+
+
+        public Buff(SEffect buffMetaData, List<Effect> effects)
+        {
+            this._buffMetaData = buffMetaData;
+            this._effects = effects;
+        }
+
         public List<Effect> Effects => this._effects;
+
+        public SEffect GetMetaData ()
+        {
+            return this._buffMetaData;
+        }
     }
 }

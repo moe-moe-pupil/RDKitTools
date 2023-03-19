@@ -47,7 +47,8 @@ namespace RDKitTools.Skill
 
             public override void Trigger(SEffect effectData)
             {
-                (Unit from, EBuffType type, double value) = effectData;
+                (Unit from, Unit target, EBuffType type, double value) = effectData;
+                target.TakeDamage(ref from, type, value * from.GetDamageModify(type));
             }
         }
 
@@ -58,7 +59,7 @@ namespace RDKitTools.Skill
             {
             }
 
-            public override void Trigger()
+            public override void Trigger(SEffect effectData)
             {
                 throw new NotImplementedException();
             }

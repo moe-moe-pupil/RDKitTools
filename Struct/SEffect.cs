@@ -8,30 +8,39 @@
 
 namespace RDKitTools.Struct
 {
+    using System.Diagnostics.CodeAnalysis;
     using RDKitTools.Enum;
     using RDKitTools.Unit;
 
-    public ref struct SEffect
+    public struct SEffect
     {
         /// <summary>
         /// buff from which unit.
         /// </summary>
-        public ref Unit From;
+        [AllowNull]
+        required public Unit From;
+
+        /// <summary>
+        /// buff's target unit.
+        /// </summary>
+        [AllowNull]
+        required public Unit Target;
 
         /// <summary>
         /// effect's type which inherited from buff.
         /// </summary>
-        public EBuffType Type;
+        required public EBuffType Type;
 
         /// <summary>
         /// just trigger value.
         /// </summary>
-        public double Value;
+        required public double Value;
 
-        public void Deconstruct(ref Unit from, out EBuffType type, out double value)
+        public void Deconstruct(out Unit from, out Unit target, out EBuffType type, out double value)
         {
             from = From;
             type = Type;
+            target = Target;
             value = Value;
         }
     }
