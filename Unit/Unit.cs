@@ -21,7 +21,7 @@ namespace RDKitTools.Unit
         /// <summary lang='zh-CN'>
         ///     基础生命值.
         /// </summary>
-        private double _hp;
+        public double HP { get; set; } = 100;
 
         /// <summary lang='zh-CN'>
         ///     额外生命值.
@@ -58,9 +58,8 @@ namespace RDKitTools.Unit
         /// </summary>
         private List<Buff> _buff = new ();
 
-        public Unit(double hp)
+        public Unit()
         {
-            this._hp = hp;
         }
 
         public double GetDamageModify(EBuffType type)
@@ -70,10 +69,10 @@ namespace RDKitTools.Unit
 
         public void TakeDamage(ref Unit attacker, EBuffType type, double value)
         {
-            this._hp -= value * _defenseModify[(int)type];
+            this.HP -= value * _defenseModify[(int)type];
         }
 
-        public void Update()
+        public void Update(double delta)
         {
             this._buff.ForEach(buff =>
             {
@@ -88,11 +87,6 @@ namespace RDKitTools.Unit
         public void GiveBuff(Buff buff)
         {
             this._buff.Add(buff);
-        }
-
-        public double GetHP()
-        {
-            return _hp;
         }
     }
 }

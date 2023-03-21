@@ -23,13 +23,23 @@ namespace Tests
         [Test]
         public void BasicEffect()
         {
-            Unit attacker = new Unit(100);
-            Unit defender = new Unit(100);
+            Unit attacker = new Unit { HP = 100 };
+            Unit defender = new Unit { HP = 100 };
             List<Effect> effects = new ();
             effects.Add(Effect.Damage);
-            attacker.GiveBuff(new Buff(new SEffect() { From = attacker, Target = defender, Type = EBuffType.Magic, Value = 1 }, effects));
-            attacker.Update();
-            Assert.That(defender.GetHP(), Is.EqualTo(99));
+            attacker.GiveBuff(new Buff
+            {
+                BuffMetaData = new SEffect
+                {
+                    From = attacker,
+                    Target = defender,
+                    Type = EBuffType.Magic,
+                    Value = 1,
+                },
+                Effects = effects,
+            });
+            attacker.Update(0.2);
+            Assert.That(defender.HP, Is.EqualTo(99));
         }
     }
 }

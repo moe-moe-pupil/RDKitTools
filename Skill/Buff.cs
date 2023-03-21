@@ -20,28 +20,8 @@ namespace RDKitTools.Skill
         /// <summary lang='Zh-CN'>
         /// 效果类聚合.
         /// </summary>
-        private List<Effect> _effects = new ();
+        required public List<Effect> Effects { get; init; }
 
-        private SEffect _buffMetaData = new ()
-        {
-            From = null,
-            Target = null,
-            Type = EBuffType.Magic,
-            Value = 0,
-        };
-
-
-        public Buff(SEffect buffMetaData, List<Effect> effects)
-        {
-            this._buffMetaData = buffMetaData;
-            this._effects = effects;
-        }
-
-        public List<Effect> Effects => this._effects;
-
-        public SEffect GetMetaData ()
-        {
-            return this._buffMetaData;
-        }
+        required public SEffect BuffMetaData { get; init; }
     }
 }

@@ -18,23 +18,23 @@ namespace RDKitTools.Struct
         /// buff from which unit.
         /// </summary>
         [AllowNull]
-        required public Unit From;
+        required public Unit From { get; set; }
 
         /// <summary>
         /// buff's target unit.
         /// </summary>
         [AllowNull]
-        required public Unit Target;
+        required public Unit Target { get; set; }
 
         /// <summary>
         /// effect's type which inherited from buff.
         /// </summary>
-        required public EBuffType Type;
+        required public EBuffType Type { get; set; }
 
         /// <summary>
         /// just trigger value.
         /// </summary>
-        required public double Value;
+        required public double Value { get; set; }
 
         public void Deconstruct(out Unit from, out Unit target, out EBuffType type, out double value)
         {
