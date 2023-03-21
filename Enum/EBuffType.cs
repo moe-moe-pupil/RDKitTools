@@ -9,6 +9,6 @@ namespace RDKitTools.Enum
     public enum EBuffType
     {
         Magic,
-        Phyic,
+        Physic,
     }
 }

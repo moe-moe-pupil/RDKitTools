@@ -10,6 +10,7 @@ namespace RDKitTools.Struct
 {
     using System.Diagnostics.CodeAnalysis;
     using RDKitTools.Enum;
+    using RDKitTools.Skill;
     using RDKitTools.Unit;
 
     public struct SEffect
@@ -21,10 +22,12 @@ namespace RDKitTools.Struct
         required public Unit From { get; set; }
 
         /// <summary>
-        /// buff's target unit.
+        /// buff's target units.
+        /// sometimes it's not the current one buff belongs to.
+        /// it's just the effect targets.
         /// </summary>
         [AllowNull]
-        required public Unit Target { get; set; }
+        required public List<Unit> Targets { get; set; }
 
         /// <summary>
         /// effect's type which inherited from buff.
@@ -34,14 +37,14 @@ namespace RDKitTools.Struct
         /// <summary>
         /// just trigger value.
         /// </summary>
-        required public double Value { get; set; }
+        required public List<double> Values { get; set; }
 
-        public void Deconstruct(out Unit from, out Unit target, out EBuffType type, out double value)
+        public void Deconstruct(out Unit from, out List<Unit> targets, out EBuffType type, out List<double> values)
         {
             from = From;
             type = Type;
-            target = Target;
-            value = Value;
+            targets = Targets;
+            values = Values;
         }
     }
 }

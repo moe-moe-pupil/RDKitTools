@@ -8,10 +8,10 @@
 
 namespace RDKitTools.Skill
 {
-    using RDKitTools.Utils;
-    using RDKitTools.Unit;
     using RDKitTools.Enum;
     using RDKitTools.Struct;
+    using RDKitTools.Unit;
+    using RDKitTools.Utils;
 
     /// <summary lang='Zh-CN'>
     /// 基础Effect类，技能效果的最小单元.
@@ -36,7 +36,7 @@ namespace RDKitTools.Skill
         /// <summary lang>
         /// trigger effect.
         /// </summary>
-        public abstract void Trigger(SEffect effectData);
+        public abstract void Trigger(SEffect effectData, int index);
 
         private sealed class DamageEffect : Effect
         {
@@ -45,10 +45,13 @@ namespace RDKitTools.Skill
             {
             }
 
-            public override void Trigger(SEffect effectData)
+            public override void Trigger(SEffect effectData, int index)
             {
-                (Unit from, Unit target, EBuffType type, double value) = effectData;
-                target.TakeDamage(ref from, type, value * from.GetDamageModify(type));
+                (Unit from, List<Unit> targets, EBuffType type, List<double> values) = effectData;
+                targets.ForEach(target =>
+                {
+                    target.TakeDamage(ref from, type, values[index] * from.GetDamageModify(type));
+                });
             }
         }
 
@@ -59,7 +62,7 @@ namespace RDKitTools.Skill
             {
             }
 
-            public override void Trigger(SEffect effectData)
+            public override void Trigger(SEffect effectData, int index)
             {
                 throw new NotImplementedException();
             }

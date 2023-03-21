@@ -27,19 +27,44 @@ namespace Tests
             Unit defender = new Unit { HP = 100 };
             List<Effect> effects = new ();
             effects.Add(Effect.Damage);
-            attacker.GiveBuff(new Buff
+            defender.GiveBuff(new Buff
             {
                 BuffMetaData = new SEffect
                 {
                     From = attacker,
-                    Target = defender,
+                    Targets = new() { defender },
                     Type = EBuffType.Magic,
-                    Value = 1,
+                    Values = new() { 1 },
                 },
                 Effects = effects,
+                Delay = 0,
+                LifeTime = 0,
+                TriggerTime = 1,
+                Name = "instant damage 1",
+                Desc = "just 1 damage",
             });
-            attacker.Update(0.2);
+            defender.GiveBuff(new Buff
+            {
+                BuffMetaData = new SEffect
+                {
+                    From = attacker,
+                    Targets = new() { defender },
+                    Type = EBuffType.Magic,
+                    Values = new() { 1 },
+                },
+                Effects = effects,
+                Delay = 1,
+                LifeTime = 0,
+                TriggerTime = 1,
+                Name = "delay 1 damage 1",
+                Desc = "just 1 delay damage",
+            });
+            defender.Update(0.02);
             Assert.That(defender.HP, Is.EqualTo(99));
+            defender.Update(0.5);
+            Assert.That(defender.HP, Is.EqualTo(99));
+            defender.Update(1);
+            Assert.That(defender.HP, Is.EqualTo(98));
         }
     }
 }

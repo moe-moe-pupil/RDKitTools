@@ -10,6 +10,7 @@ namespace RDKitTools.Skill
 {
     using RDKitTools.Enum;
     using RDKitTools.Struct;
+    using RDKitTools.Unit;
 
     /// <summary lang='Zh-CN'>
     /// Buff类，Effect类的聚合，负责分类和触发Effect.
@@ -17,11 +18,64 @@ namespace RDKitTools.Skill
     /// </summary>
     public class Buff
     {
+        private double _delay;
+
+        private int _triggerTime = 1;
+
         /// <summary lang='Zh-CN'>
         /// 效果类聚合.
         /// </summary>
         required public List<Effect> Effects { get; init; }
 
-        required public SEffect BuffMetaData { get; init; }
+        required public string Name { get; init; }
+
+        required public string Desc { get; init; }
+
+        required public SEffect BuffMetaData { get; set; } = new()
+        {
+            From = null,
+            Targets = null,
+            Type = EBuffType.Magic,
+            Values = new() { 0 },
+        };
+
+        required public double Delay
+        {
+            get => _delay;
+            set => _delay = value;
+        }
+
+        required public double LifeTime { get; init; }
+
+        required public int TriggerTime
+        {
+            get => _triggerTime;
+            set => _triggerTime = value;
+        }
+
+        public void Update(double delta)
+        {
+            (Unit from, List<Unit> targets, EBuffType type, List<double> values) = BuffMetaData;
+            if (Delay - delta > 0)
+            {
+                Delay -= delta;
+            }
+            else if (TriggerTime > 0)
+            {
+                foreach (var item in Effects.Select((effect, index) => (effect, index)))
+                {
+                    item.effect.Trigger(
+                    new SEffect
+                    {
+                        From = from,
+                        Targets = targets,
+                        Type = type,
+                        Values = values,
+                    },
+                    item.index);
+                    TriggerTime -= 1;
+                }
+            }
+        }
     }
 }

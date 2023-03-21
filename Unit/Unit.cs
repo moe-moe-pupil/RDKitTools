@@ -26,7 +26,7 @@ namespace RDKitTools.Unit
         /// <summary lang='zh-CN'>
         ///     额外生命值.
         /// </summary>
-        private double _extraHp;
+        private double _extraHP;
 
         /// <summary lang='zh-CN'>
         ///     造成伤害调整.
@@ -58,10 +58,6 @@ namespace RDKitTools.Unit
         /// </summary>
         private List<Buff> _buff = new ();
 
-        public Unit()
-        {
-        }
-
         public double GetDamageModify(EBuffType type)
         {
             return _damageModify[(int)type];
@@ -72,15 +68,15 @@ namespace RDKitTools.Unit
             this.HP -= value * _defenseModify[(int)type];
         }
 
+        /// <summary>
+        /// update unit's status.should use in every tick.
+        /// </summary>
+        /// <param name="delta">delta tick.</param>
         public void Update(double delta)
         {
             this._buff.ForEach(buff =>
             {
-                (Unit from, Unit target, EBuffType type, double value) = buff.GetMetaData();
-                buff.Effects.ForEach(effect =>
-                {
-                    effect.Trigger(new SEffect() { From = from, Target = target, Type = type, Value = value });
-                });
+                buff.Update(delta);
             });
         }
 

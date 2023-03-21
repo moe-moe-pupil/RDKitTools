@@ -62,6 +62,9 @@ dotnet_diagnostic.SA1649.severity = suggestion
 # SA1101: Prefix local calls with this
 dotnet_diagnostic.SA1101.severity = none
 
+# SA1000: Keywords should be spaced correctly
+dotnet_diagnostic.SA1000.severity = none
+
 [*.{cs,vb}]
 #### Naming styles ####
 
