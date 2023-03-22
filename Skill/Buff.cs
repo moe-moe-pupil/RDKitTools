@@ -22,6 +22,8 @@ namespace RDKitTools.Skill
 
         private int _triggerTime = 1;
 
+        private double _lifeTime;
+
         /// <summary lang='Zh-CN'>
         /// 效果类聚合.
         /// </summary>
@@ -45,7 +47,11 @@ namespace RDKitTools.Skill
             set => _delay = value;
         }
 
-        required public double LifeTime { get; init; }
+        required public double LifeTime
+        {
+            get => _lifeTime;
+            set => _lifeTime = value;
+        }
 
         required public int TriggerTime
         {
@@ -75,6 +81,8 @@ namespace RDKitTools.Skill
                     item.index);
                     TriggerTime -= 1;
                 }
+
+                LifeTime -= delta;
             }
         }
     }

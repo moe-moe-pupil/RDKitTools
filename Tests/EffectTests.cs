@@ -61,9 +61,12 @@ namespace Tests
             });
             defender.Update(0.02);
             Assert.That(defender.HP, Is.EqualTo(99));
+            Assert.That(defender.Buffs.Count, Is.EqualTo(1));
             defender.Update(0.5);
             Assert.That(defender.HP, Is.EqualTo(99));
+            Assert.That(defender.Buffs.Count, Is.EqualTo(1));
             defender.Update(1);
+            Assert.That(defender.Buffs.Count, Is.EqualTo(0));
             Assert.That(defender.HP, Is.EqualTo(98));
         }
     }

@@ -56,7 +56,13 @@ namespace RDKitTools.Unit
         /// <summary lang='zh-CN'>
         ///     目前身上的buff.
         /// </summary>
-        private List<Buff> _buff = new ();
+        private List<Buff> _buffs = new();
+
+        public List<Buff> Buffs
+        {
+            get => _buffs;
+            private set => _buffs = value;
+        }
 
         public double GetDamageModify(EBuffType type)
         {
@@ -74,15 +80,22 @@ namespace RDKitTools.Unit
         /// <param name="delta">delta tick.</param>
         public void Update(double delta)
         {
-            this._buff.ForEach(buff =>
+            foreach (var item in Buffs.Select((buff, index) => (buff, index)))
             {
-                buff.Update(delta);
-            });
+                item.buff.Update(delta);
+            }
+
+            RemoveAllDeadBuff();
         }
 
         public void GiveBuff(Buff buff)
         {
-            this._buff.Add(buff);
+            Buffs.Add(buff);
+        }
+
+        public void RemoveAllDeadBuff()
+        {
+            Buffs.RemoveAll(buff => buff.LifeTime < 0);
         }
     }
 }
