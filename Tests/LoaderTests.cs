@@ -8,7 +8,6 @@
 namespace Tests
 {
     using RDKitTools.Loader;
-    using RDKitTools.Skill;
     using RDKitTools.Unit;
 
     [TestFixture]
@@ -26,7 +25,7 @@ namespace Tests
             Csv csv = new Csv(test.FullName.Substring(0, test.FullName.IndexOf(@"\bin")) + @"\buffs.csv");
             Unit attacker = new Unit { HP = 100, MaxHP = 100 };
             Unit defender = new Unit { HP = 100, MaxHP = 100 };
-            for (var i = 0; i < 3; i++)
+            for (var i = 0; i < csv.Buffs.Count; i++)
             {
                 var newMetaData = csv.Buffs[i].BuffMetaData;
                 newMetaData.Targets = new() { defender };
