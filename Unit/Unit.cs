@@ -24,6 +24,11 @@ namespace RDKitTools.Unit
         public double HP { get; set; } = 100;
 
         /// <summary lang='zh-CN'>
+        ///     最大生命值.
+        /// </summary>
+        public double MaxHP { get; set; } = 100;
+
+        /// <summary lang='zh-CN'>
         ///     额外生命值.
         /// </summary>
         private double _extraHP;
@@ -36,7 +41,12 @@ namespace RDKitTools.Unit
         /// <summary lang='zh-CN'>
         ///     遭受伤害调整.
         /// </summary>
-        private List<double> _defenseModify = new (Enumerable.Repeat<double>(1, Enum.GetNames(typeof(EBuffType)).Length));
+        private List<double> _takeDamageModify = new (Enumerable.Repeat<double>(1, Enum.GetNames(typeof(EBuffType)).Length));
+
+        /// <summary lang='zh-CN'>
+        ///     遭受治疗调整.
+        /// </summary>
+        private List<double> _takeHealModify = new (Enumerable.Repeat<double>(1, Enum.GetNames(typeof(EBuffType)).Length));
 
         /// <summary lang='zh-CN'>
         ///     移动速度.
@@ -71,7 +81,14 @@ namespace RDKitTools.Unit
 
         public void TakeDamage(ref Unit attacker, EBuffType type, double value)
         {
-            this.HP -= value * _defenseModify[(int)type];
+            HP -= value * _takeDamageModify[(int)type];
+            HP = Math.Max(HP, 0);
+        }
+
+        public void TakeHeal(ref Unit healer, EBuffType type, double value)
+        {
+            HP += value * _takeHealModify[(int)type];
+            HP = Math.Min(HP, MaxHP);
         }
 
         /// <summary>

@@ -64,7 +64,11 @@ namespace RDKitTools.Skill
 
             public override void Trigger(SEffect effectData, int index)
             {
-                throw new NotImplementedException();
+                (Unit from, List<Unit> targets, EBuffType type, List<double> values) = effectData;
+                targets.ForEach(target =>
+                {
+                    target.TakeHeal(ref from, type, values[index] * from.GetDamageModify(type));
+                });
             }
         }
     }

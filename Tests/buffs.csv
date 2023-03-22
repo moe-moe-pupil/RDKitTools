@@ -1,2 +1,4 @@
 name,desc,delay,life_time,trigger_times,effects,values,type
-Е█ЁФ≈╤Д╪╓Е╝Ё1,Г╚▀Е█ЁИ─═Ф┬░1Г┌╧Д╪╓Е╝Ё,0,0,1,Damage,99,Physic
+╪╢й╠ик╨╕99,а╒╪╢тЛЁи99╣Цик╨╕,0,0,1,Damage,99,Physic
+ясй╠1жнаф50,ясй╠1тЛЁи500╣Цжнаф,1,0,1,Heal,500,Physic
+ясй╠2жнаф20ик╨╕30,ясй╠2тЛЁи20╣Цжнаф╨м30╣Цик╨╕,2,0,1,"Heal,Damage","20,30",Physic
