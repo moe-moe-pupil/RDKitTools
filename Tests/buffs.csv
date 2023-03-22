@@ -1,0 +1,2 @@
+name,desc,delay,life_time,trigger_times,effects,values,type
+即时伤害1,立即造成1点伤害,0,0,1,Damage,99,Physic

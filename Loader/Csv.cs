@@ -24,10 +24,7 @@ namespace RDKitTools.Loader
     {
         public Csv(string path)
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-            // Todo: 处理多语言
-            using (var streamReader = new StreamReader(path, Encoding.GetEncoding("GB2312")))
+            using (var streamReader = new StreamReader(path))
             {
                 using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
                 {
